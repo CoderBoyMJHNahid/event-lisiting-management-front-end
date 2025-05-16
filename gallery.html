@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Gallery - Events</title>
+    <!-- Bootstrap css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+    />
+    <!-- custom css -->
+    <link
+      rel="stylesheet"
+      href="css/style.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-zoom.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lg-thumbnail.min.css"
+    />
+
+    <!-- Bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.js"></script>
+    <!-- imagesLoaded js -->
+    <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+    <!-- Lightgallery JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/zoom/lg-zoom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/plugins/thumbnail/lg-thumbnail.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a
+            class="navbar-brand"
+            href="index.html"
+          >
+            <img
+              width="300px"
+              src="images/logo.png"
+              alt="Logo Images"
+            />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarSupportedContent"
+          >
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  aria-current="page"
+                  href="index.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#about-us"
+                  >About us</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#events"
+                  >All Events</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#gallery"
+                  >Gallery</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <section
+      id="gallery"
+      class="py-5 position-relative"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <div class="text_heading">
+              <h2>Our Gallery</h2>
+            </div>
+            <p class="mt-4">
+              Explore our diverse collection of projects and creative work
+              across various disciplines.
+            </p>
+          </div>
+          <div class="col-md-12">
+            <div id="gallery_menu">
+              <ul id="gallery_content">
+                <li
+                  data-filter="*"
+                  class="active"
+                >
+                  All
+                </li>
+                <li data-filter=".sports">Sports</li>
+                <li data-filter=".convication">Convocation</li>
+                <li data-filter=".addmission">Addmission</li>
+                <li data-filter=".club">Club</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div
+          id="lightgallery"
+          class="row grid"
+        >
+          <!-- Web Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item sports">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Design Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item sports">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Design Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Web Development Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item convication">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Development Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item convication">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Development Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Graphics Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item addmission">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Graphics Design Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item addmission">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Graphics Design Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Logo Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item club">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Logo Design Project 1"
+              />
+            </a>
+          </div>
+          <div
+            class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item club addmission"
+          >
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Logo Design Project 2"
+              />
+            </a>
+          </div>
+          <!-- Web Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item sports">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Design Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item sports">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Design Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Web Development Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item convication">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Development Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item convication">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Web Development Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Graphics Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item addmission">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Graphics Design Project 1"
+              />
+            </a>
+          </div>
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item addmission">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Graphics Design Project 2"
+              />
+            </a>
+          </div>
+
+          <!-- Logo Design Items -->
+          <div class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item club">
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Logo Design Project 1"
+              />
+            </a>
+          </div>
+          <div
+            class="col-sm-6 col-md-4 col-lg-3 mb-4 grid-item club addmission"
+          >
+            <a
+              href="images/event1.jpg"
+              class="gripImg"
+            >
+              <img
+                class="gripImg_img"
+                src="images/event1.jpg"
+                alt="Logo Design Project 2"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+      <img
+        src="images/waveFoote.svg"
+        alt="Footer shape"
+        class="position-absolute bottom-0 start-0"
+      />
+    </section>
+    <footer class="pt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5">
+            <div class="footer-logo mb-4">
+              <img
+                width="250px"
+                src="images/footer_logo.png"
+                alt="Footer Logo"
+              />
+            </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
+              quibusdam adipisci nostrum magni sint voluptas explicabo
+              dignissimos hic? Explicabo, impedit!
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <h4 class="mb-3">Quick Links</h4>
+            <div class="row">
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="#">Home</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Events</a></li>
+                </ul>
+              </div>
+              <div class="col-lg-6">
+                <ul class="list-unstyled">
+                  <li><a href="#">Gallery</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">F&Q</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <h4 class="mb-3">Contact Us</h4>
+            <ul class="list-unstyled">
+              <li>
+                <i class="fa-solid fa-location-dot"></i> 123, Main Street, City,
+                Country
+              </li>
+              <li><i class="fa-solid fa-phone"></i> +1 (123) 456-7890</li>
+              <li><i class="fa-solid fa-envelope"></i> 7sBbN@example.com</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="text-center bg-dark py-3 mt-5">
+        <p class="mb-0">
+          &copy; 2025 Developed by team name. All rights reserved.
+        </p>
+      </div>
+    </footer>
+    <script>
+      lightGallery(document.getElementById("lightgallery"), {
+        selector: ".gripImg",
+        plugins: [lgZoom, lgThumbnail],
+        speed: 500,
+        download: false,
+        counter: true,
+        thumbnail: true,
+        animateThumb: true,
+        zoomFromOrigin: true,
+        allowMediaOverlap: true,
+      });
+      $(document).ready(function () {
+        var $grid = $(".grid").isotope({
+          itemSelector: ".grid-item",
+          percentPosition: true,
+          layoutMode: "fitRows",
+          fitRows: {
+            gutter: 0,
+          },
+        });
+
+        $("#gallery_content li").on("click", function () {
+          var filterValue = $(this).attr("data-filter");
+
+          // Update active class
+          $("#gallery_content li").removeClass("active");
+          $(this).addClass("active");
+          $grid.isotope({ filter: filterValue });
+        });
+
+        $grid.imagesLoaded().progress(function () {
+          $grid.isotope("layout");
+        });
+      });
+    </script>
+  </body>
+</html>

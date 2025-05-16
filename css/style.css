@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+}
+img {
+  max-width: 100%;
+}
+header {
+  box-shadow: 0 0 6px 1px #0000001a;
+}
+a.nav-link {
+  color: rgb(84, 84, 84) !important;
+  font-family: "Poppins", sans-serif;
+  &:hover {
+    color: #7e184e !important;
+  }
+}
+a.nav-link.active {
+  color: #7e184e !important;
+}
+a.nav-link::after {
+  bottom: -5px;
+  content: "";
+  display: block;
+  position: relative;
+  width: 0px;
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+  margin: 0px auto;
+  transition: 280ms ease-in-out;
+}
+a.nav-link:hover::after {
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7e184e;
+  border-image: initial;
+}
+#about-us {
+  background: #e7e7e7;
+  h2 {
+    color: #7e184e;
+    font-weight: 600;
+  }
+}
+.text_heading::after {
+  overflow: hidden;
+  border: 2px solid #7e184e;
+  bottom: -5px;
+  content: "";
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  -webkit-transition: all 280ms ease-in-out;
+  transition: all 280ms ease-in-out;
+  width: 22%;
+}
+#events {
+  .card {
+    border: 0.5px solid #e7e7e7;
+    box-shadow: 1px 8px 15px 1px #0000001a !important;
+    transition: all 0.3s;
+  }
+  .card:hover {
+    transform: translateY(-15px);
+    cursor: pointer;
+  }
+  .card-body {
+    padding: 30px;
+    background: #f9f9f9;
+    p {
+      color: gray;
+    }
+    a.btn-event {
+      text-decoration: none;
+      color: #7e184e;
+      transition: all 0.3s;
+    }
+    .btn-event:hover {
+      text-decoration: underline;
+      color: #7e184e;
+    }
+  }
+}
+.event_btn {
+  all: unset;
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  background: transparent;
+  border: none;
+  position: relative;
+  color: #f0f0f0;
+  cursor: pointer;
+  z-index: 1;
+  padding: 6px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.event_btn::after,
+.event_btn::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: -99999;
+  transition: all 0.4s;
+}
+
+.event_btn::before {
+  transform: translate(0%, 0%);
+  width: 100%;
+  height: 100%;
+  background: #7e184e;
+  border-radius: 10px;
+}
+
+.event_btn::after {
+  transform: translate(10px, 10px);
+  width: 35px;
+  height: 35px;
+  background: #ffffff15;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 50px;
+}
+
+.event_btn:hover::before {
+  transform: translate(5%, 20%);
+  width: 110%;
+  height: 110%;
+}
+
+.event_btn:hover::after {
+  border-radius: 10px;
+  transform: translate(0, 0);
+  width: 100%;
+  height: 100%;
+}
+
+.event_btn:active::after {
+  transition: 0s;
+  transform: translate(0, 5%);
+}
+#gallery {
+  background: #f7f7f7;
+  padding-bottom: 250px !important;
+}
+ul#gallery_content {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+ul#gallery_content li {
+  display: inline-block;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    color: #7e184e;
+  }
+}
+ul#gallery_content li::after {
+  bottom: -5px;
+  content: "";
+  display: block;
+  position: relative;
+  width: 0px;
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  border-image: initial;
+  margin: 0px auto;
+  transition: 280ms ease-in-out;
+}
+ul#gallery_content li:hover::after {
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7e184e;
+  border-image: initial;
+}
+div#gallery_menu {
+  margin-bottom: 30px;
+}
+.gripImg {
+  img {
+    border-radius: 10px;
+  }
+}
+.gripImg_img {
+  transition: all 0.3s;
+}
+.gripImg:hover .gripImg_img {
+  transform: scale(1.05);
+}
+
+.event_sidebar_wrapper {
+  padding: 15px 20px;
+  box-shadow: -1px 6px 13px 0px #c3c3c3;
+  border-radius: 7px;
+}
+p.event_date.mb-0 {
+  font-size: 12px;
+  color: gray;
+}
+
+h5.event_title {
+  font-size: 18px;
+  transition: all 0.3s;
+  a{
+    text-decoration: none;
+    color: #1a1a1a;
+  }
+  a:hover {
+    color: #7e184e;
+  }
+}
+
+.event_wrapper {
+  padding: 5px;
+  margin: 10px 0px;
+}
+
+footer {
+  background: #7e184e;
+  color: #f7f7f7;
+  li a {
+    text-decoration: none;
+    color: #f7f7f7;
+    transition: all 0.3s;
+  }
+  li a:hover {
+    text-decoration: underline;
+    color: #f7f7f7;
+  }
+}
