@@ -11,10 +11,53 @@ $(document).ready(function () {
     $grid.isotope({ filter: filterValue });
   });
 
+  function loadEvents() {
+    $.get(`${BACKEND_API_URL}/events`).then((res) => {
+      let html = "";
+      res.data.slice(0, 6).forEach((event) => {
+        let descriptionElement = document.createElement("div");
+        descriptionElement.innerHTML = event.description;
+        let plainTextDescription =
+          descriptionElement.textContent || descriptionElement.innerText || "";
+
+        let shortDescription = plainTextDescription.trim().substring(0, 100);
+        if (plainTextDescription.length > 100) {
+          shortDescription += "...";
+        }
+
+        html += `<div class="col-lg-4 mb-5">
+            <div class="card">
+            <a href="details-events.html?id=${event.id}">
+              <img
+                src="${event.thumbnail}"
+                class="card-img-top"
+                alt="Event Images"
+              />
+              <div class="card-body">
+                <h5 class="card-title">
+                  <a href="details-events.html?id=${event.id}">${event.title}</a>
+                </h5>
+                <p class="card-text">
+                  ${shortDescription}
+                </p>
+                <a
+                  href="details-events.html?id=${event.id}"
+                  class="btn-event"
+                  >Read More</a
+                >
+              </div>
+              </a>
+            </div>
+          </div>`;
+      });
+
+      $("#events_content").html(html);
+    });
+  }
+  loadEvents();
   function loadedGallery() {
     $.get(`${BACKEND_API_URL}/gallery`)
       .then((res) => {
-        console.log(res);
         let li_data = `<li data-filter="*" class="active">All</li>`;
         let image_data = "";
         if (res.length > 0) {

@@ -68,6 +68,16 @@ a.nav-link:hover::after {
     border: 0.5px solid #e7e7e7;
     box-shadow: 1px 8px 15px 1px #0000001a !important;
     transition: all 0.3s;
+    h5{
+      a{
+        text-decoration: none;
+        color: #282828;
+        transition: all 0.3s;
+      }
+      a:hover{
+        color: #7e184e;
+      }
+    }
   }
   .card:hover {
     transform: translateY(-15px);
@@ -224,7 +234,7 @@ p.event_date.mb-0 {
 h5.event_title {
   font-size: 18px;
   transition: all 0.3s;
-  a{
+  a {
     text-decoration: none;
     color: #1a1a1a;
   }
@@ -237,7 +247,44 @@ h5.event_title {
   padding: 5px;
   margin: 10px 0px;
 }
+div#events_content .card {
+  height: 450px;
+}
+div#events_content_details .card {
+    height: 435px;
+    img{
+      object-fit: cover;
+      height: 200px;
+    }
+}
+div#events_content .card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.event_wrapper{
+  img{
+    object-fit: fill;
+    height: 60px;
+    width: 80px;
+  }
+}
+.row.related_event_card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
 
+.row.related_event_card a {
+    text-decoration: none;
+    color: #404040;
+    font-size: 18px;
+    transition: all 0.3s;
+    &:hover{
+      color: #7e184e;
+    }
+}
 footer {
   background: #7e184e;
   color: #f7f7f7;

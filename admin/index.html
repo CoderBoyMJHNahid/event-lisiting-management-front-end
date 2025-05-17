@@ -172,7 +172,7 @@
               <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="#">Home</a></li>
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                   <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
               </div>
@@ -191,20 +191,20 @@
             <div class="row">
               <div class="col-lg-3 col-6">
                 <!-- small box -->
-                <div class="small-box bg-info">
+                <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>150</h3>
-
-                    <p>New Orders</p>
+                    <h3 id="totalCategories">0</h3>
+                    <p>Categories</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="fas fa-list"></i>
                   </div>
                   <a
-                    href="#"
+                    href="category.html"
                     class="small-box-footer"
-                    >More info <i class="fas fa-arrow-circle-right"></i
-                  ></a>
+                  >
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                  </a>
                 </div>
               </div>
               <!-- ./col -->
@@ -212,22 +212,59 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>53</h3>
-
-                    <p>Products</p>
+                    <h3 id="totalEvents">0</h3>
+                    <p>Events</p>
                   </div>
                   <div class="icon">
-                    <i class="fa fa-mobile"></i>
+                    <i class="fas fa-calendar-alt"></i>
+                  </div>
+                  <a
+                    href="events.html"
+                    class="small-box-footer"
+                  >
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-primary">
+                  <div class="inner">
+                    <h3 id="totalGallery">0</h3>
+                    <p>Gallery Images</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-image"></i>
+                  </div>
+                  <a
+                    href="gallery.html"
+                    class="small-box-footer"
+                  >
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- ./col -->
+              <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-secondary">
+                  <div class="inner">
+                    <h3 id="totalUsers">0</h3>
+                    <p>Users</p>
+                  </div>
+                  <div class="icon">
+                    <i class="fas fa-users"></i>
                   </div>
                   <a
                     href="#"
                     class="small-box-footer"
-                    >More info <i class="fas fa-arrow-circle-right"></i
-                  ></a>
+                  >
+                    More info <i class="fas fa-arrow-circle-right"></i>
+                  </a>
                 </div>
               </div>
-
-              <!-- right col -->
+              <!-- ./col -->
             </div>
             <!-- /.row (main row) -->
           </div>
@@ -235,10 +272,10 @@
         </section>
         <!-- /.content -->
       </div>
+
       <!-- /.content-wrapper -->
     </div>
     <!-- ./wrapper -->
-
 
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
@@ -274,7 +311,7 @@
     <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    
+
     <!-- Select2 -->
     <script src="plugins/select2/js/select2.full.min.js"></script>
     <!-- Summernote -->
@@ -290,16 +327,47 @@
 
     <script>
       $(document).ready(function () {
-        $("#datatable")
-          .DataTable({
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#datatable_wrapper .col-md-6:eq(0)");
+        const BACKEND_API_URL = "http://localhost:3000/api";
+
+        function loadDashboardStats() {
+          $.ajax({
+            url: `${BACKEND_API_URL}/events/summery`,
+            method: "GET",
+            dataType: "json",
+            success: function (response) {
+              if (response.success && response.data) {
+                const data = response.data;
+
+                // $("#totalUsers").text(data.totalUsers || 0);
+                $("#totalCategories").text(data.totalCategories || 0);
+                $("#totalEvents").text(data.totalEvents || 0);
+                $("#totalGallery").text(data.totalGalleryItems || 0);
+              } else {
+                console.error("Invalid API response format:", response);
+                Swal.fire({
+                  icon: "warning",
+                  title: "Data Error",
+                  text: "The API returned data in an unexpected format.",
+                });
+              }
+            },
+            error: function (xhr) {
+              console.error("Error loading dashboard data:", xhr.responseText);
+              Swal.fire({
+                icon: "error",
+                title: "Connection Error",
+                text: "Failed to load dashboard statistics. Please check your API server.",
+                confirmButtonText: "Retry",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  loadDashboardStats();
+                }
+              });
+            },
+          });
+        }
+
+        loadDashboardStats();
       });
     </script>
   </body>

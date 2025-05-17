@@ -198,7 +198,7 @@
             <div class="row">
               <div class="card w-100">
                 <div class="card-body">
-                  <form>
+                  <form id="addEventForm">
                     <div class="row">
                       <div class="col-12">
                         <div class="form-group">
@@ -231,7 +231,35 @@
                             name="event_category"
                             class="form-control"
                             id="event_category"
+                            required
                           ></select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_type">Select the Type</label>
+                          <select
+                            name="event_type"
+                            id="event_type"
+                            class="form-control"
+                            required
+                          >
+                            <option value="New">New</option>
+                            <option value="Up Coming">UpComing</option>
+                            <option value="Normal">Normal</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_type">Select the Date</label>
+                          <input
+                            type="date"
+                            name="event_date"
+                            id="event_date"
+                            class="form-control"
+                            required
+                          />
                         </div>
                       </div>
                       <div class="col-12">

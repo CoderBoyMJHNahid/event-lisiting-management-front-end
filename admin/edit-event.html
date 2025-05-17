@@ -162,66 +162,119 @@
 
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
+        <!-- Content Header -->
         <div class="content-header">
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">All Events</h1>
+                <h1 class="m-0">Edit Event</h1>
               </div>
-              <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
-                  <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-                  <li class="breadcrumb-item active">Events</li>
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active">Edit Event</li>
                 </ol>
               </div>
-              <!-- /.col -->
               <div class="col-12 d-flex justify-content-end">
                 <a
-                  href="add-event.html"
-                  class="btn btn-primary btn-sm text-end"
-                  >Add New</a
+                  href="events.html"
+                  class="btn btn-secondary btn-sm"
+                  >Back</a
                 >
               </div>
             </div>
-            <!-- /.row -->
           </div>
-          <!-- /.container-fluid -->
         </div>
-        <!-- /.content-header -->
 
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
             <div class="row">
               <div class="card w-100">
                 <div class="card-body">
-                  <table
-                    id="eventDataTable"
-                    class="table table-bordered table-striped"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Serial No.</th>
-                        <th>Title</th>
-                        <th>Thumbnail</th>
-                        <th>Category Name</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody></tbody>
-                  </table>
+                  <form id="editEventForm">
+                    <input
+                      type="hidden"
+                      id="event_id"
+                      name="event_id"
+                    />
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="event_desc">Event Description</label>
+                          <textarea
+                            name="event_desc"
+                            id="event_desc"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="edit_event_name">Event Title</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="edit_event_name"
+                            name="edit_event_name"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="edit_event_category"
+                            >Event Category</label
+                          >
+                          <select
+                            name="edit_event_category"
+                            id="edit_event_category"
+                            class="form-control"
+                            required
+                          ></select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_type">Event Type</label>
+                          <select
+                            name="event_type"
+                            id="event_type"
+                            class="form-control"
+                            required
+                          >
+                            <option value="New">New</option>
+                            <option value="Up Coming">Up Coming</option>
+                            <option value="Normal">Normal</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_date">Event Date</label>
+                          <input
+                            type="date"
+                            name="event_date"
+                            id="event_date"
+                            class="form-control"
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                        >
+                          Update
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-          <!-- /.container-fluid -->
         </section>
-        <!-- /.content -->
       </div>
       <!-- /.content-wrapper -->
     </div>
@@ -274,5 +327,123 @@
     <script src="dist/js/adminlte.js"></script>
     <!-- custom js -->
     <script src="dist/js/app.js"></script>
+    <script type="text/javascript">
+      const BACKEND_API_URL = "http://localhost:3000/api";
+      const urlParams = new URLSearchParams(window.location.search);
+      const eventId = urlParams.get("id");
+      if (!eventId) {
+        window.location.href = "events.html";
+      }
+
+      $(document).ready(function () {
+        $("#event_id").val(eventId);
+
+        loadCategories()
+          .then(() => {
+            loadEventDetails();
+          })
+          .catch((error) => {
+            console.error("Error in initialization sequence:", error);
+            Swal.fire("Error", "Could not initialize the form.", "error");
+          });
+
+        function loadCategories() {
+          return new Promise((resolve, reject) => {
+            $.ajax({
+              url: `${BACKEND_API_URL}/category`,
+              method: "GET",
+              success: function (response) {
+                const categories = response.data || response; 
+                const categorySelect = $("#edit_event_category");
+                categorySelect.empty();
+
+                categorySelect.append(new Option("Select a category", ""));
+
+                categories.forEach(function (category) {
+                  categorySelect.append(new Option(category.name, category.id));
+                });
+
+                console.log(
+                  "Categories loaded successfully:",
+                  categories.length
+                );
+                resolve();
+              },
+              error: function (xhr, status, error) {
+                console.error("Error loading categories:", error);
+                reject(error);
+              },
+            });
+          });
+        }
+
+        function loadEventDetails() {
+          $.ajax({
+            url: `${BACKEND_API_URL}/events/${eventId}`,
+            method: "GET",
+            success: function (response) {
+              const event = response.data || response;
+
+              $("#edit_event_name").val(event.title);
+
+              $("#event_desc").summernote("code", event.description);
+
+              const categorySelect = $("#edit_event_category");
+              categorySelect.val(event.category);
+
+              if (categorySelect.val() !== event.category) {
+                console.warn(
+                  `Category '${event.category}' not found in available options.`
+                );
+              }
+
+              $("#event_type").val(event.type);
+              $("#event_date").val(event.date);
+
+              console.log("Event data loaded successfully:", event);
+            },
+            error: function (xhr, status, error) {
+              console.error("Error loading event:", error);
+              Swal.fire("Error", "Could not load event details.", "error");
+            },
+          });
+        }
+
+        $("#editEventForm").on("submit", function (e) {
+          e.preventDefault();
+
+          const formData = {
+            event_name: $("#edit_event_name").val(),
+            event_desc: $("#event_desc").summernote("code"),
+            event_category: $("#edit_event_category").val(),
+            event_type: $("#event_type").val(),
+            event_date: $("#event_date").val(),
+          };
+
+          console.log("Submitting form data:", formData);
+
+          $.ajax({
+            url: `${BACKEND_API_URL}/events/${eventId}`,
+            method: "PUT",
+            data: JSON.stringify(formData),
+            contentType: "application/json",
+            success: function (response) {
+              Swal.fire({
+                title: "Success!",
+                text: "Event updated successfully",
+                icon: "success",
+                confirmButtonText: "OK",
+              }).then(() => {
+                window.location.href = "events.html";
+              });
+            },
+            error: function (xhr, status, error) {
+              console.error("Error updating event:", error);
+              Swal.fire("Error", "Could not update event.", "error");
+            },
+          });
+        });
+      });
+    </script>
   </body>
 </html>

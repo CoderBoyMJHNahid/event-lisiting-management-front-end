@@ -135,6 +135,56 @@ $(document).ready(function () {
     ],
   });
 
+  let eventTable = $("#eventDataTable").DataTable({
+    processing: true,
+    responsive: true,
+    lengthChange: false,
+    autoWidth: false,
+    ajax: {
+      url: `${BACKEND_API_URL}/events`,
+      dataSrc: function (response) {
+        return Array.isArray(response) ? response : response.data || [];
+      },
+    },
+    columns: [
+      {
+        data: null,
+        render: function (data, type, row, meta) {
+          return meta.row + 1;
+        },
+      },
+      { data: "title" },
+      {
+        data: "thumbnail",
+        render: function (data, type, row) {
+          return `<img src="${row.thumbnail}" width="100" />`;
+        },
+      },
+      { data: "category_name" },
+      { data: "type" },
+      { data: "date" },
+      {
+        data: null,
+        render: function (data, type, row) {
+          return `
+            <a href="edit-event.html?id=${
+              row.id || row._id
+            }" class="btn btn-success btn-sm edit-btn" data-id="${
+            row.id || row._id
+          }">
+              Edit
+            </a>
+            <button class="btn btn-danger btn-sm delete-event-btn" data-id="${
+              row.id || row._id
+            }">
+              Delete
+            </button>
+          `;
+        },
+      },
+    ],
+  });
+
   // Handle Add Category form submission
   $("#addCategoryForm").submit(function (e) {
     e.preventDefault();
@@ -271,8 +321,11 @@ $(document).ready(function () {
           event_category.empty();
           res.forEach(function (category) {
             let option = $("<option>").val(category.name).text(category.name);
+            let optionevent = $("<option>")
+              .val(category.id)
+              .text(category.name);
             selectCategory.append(option);
-            event_category.append(option);
+            event_category.append(optionevent);
           });
         } else {
           console.log("No categories found.");
@@ -436,6 +489,71 @@ $(document).ready(function () {
         console.error("Error:", xhr.responseText);
         showErrorMessage("Failed to add image.");
       },
+    });
+  });
+
+  // handle add events form
+  $("#addEventForm").submit(function (e) {
+    e.preventDefault();
+
+    const formData = {
+      event_name: $("#event_name").val(),
+      event_category: $("#event_category").val(),
+      event_type: $("#event_type").val(),
+      event_date: $("#event_date").val(),
+      event_desc: $("#event_desc").summernote("code"),
+    };
+
+    $.ajax({
+      url: `${BACKEND_API_URL}/events`,
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify(formData),
+      success: function (res) {
+        showSuccessMessage("Event has been added successfully!");
+        setTimeout(() => {
+          window.location.href = "/admin/events.html";
+        }, 2000);
+      },
+      error: function (err) {
+        showErrorMessage("Failed to add event.");
+        console.error(err);
+      },
+    });
+  });
+
+  // handle delete event
+  $(document).on("click", ".delete-event-btn", function () {
+    let eventId = $(this).data("id");
+
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: `${BACKEND_API_URL}/events/${eventId}`,
+          type: "DELETE",
+          dataType: "json",
+          success: function (res) {
+            if (res.success) {
+              eventTable.ajax.reload();
+              showSuccessMessage("Event has been deleted.");
+            } else {
+              showErrorMessage(res.message);
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("Error:", xhr.responseText);
+            showErrorMessage("Failed to delete Event.");
+          },
+        });
+      }
     });
   });
 });
