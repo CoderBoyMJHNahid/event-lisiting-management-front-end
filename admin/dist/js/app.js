@@ -2,6 +2,35 @@ $(document).ready(function () {
   const BACKEND_API_URL = "http://localhost:3000/api";
 
   // Message functions
+
+  $("#event_desc").summernote({
+    height: 250,
+    placeholder: "Write the event description here...",
+    callbacks: {
+      onImageUpload: function (files) {
+        uploadImage(files[0]);
+      },
+    },
+  });
+  function uploadImage(file) {
+    const data = new FormData();
+    data.append("image", file);
+
+    $.ajax({
+      url: `${BACKEND_API_URL}/events/upload-event-image`,
+      method: "POST",
+      data: data,
+      contentType: false,
+      processData: false,
+      success: function (response) {
+        console.log("🚀 ~ uploadImage ~ response:", response);
+        $("#event_desc").summernote("insertImage", response.imageUrl);
+      },
+      error: function (err) {
+        console.error("Image upload failed:", err);
+      },
+    });
+  }
   function showSuccessMessage(message) {
     Swal.fire({
       icon: "success",
@@ -237,11 +266,13 @@ $(document).ready(function () {
       success: function (res) {
         if (res.length > 0) {
           let selectCategory = $("#editSelectCategory");
+          let event_category = $("#event_category");
           selectCategory.empty();
-
+          event_category.empty();
           res.forEach(function (category) {
             let option = $("<option>").val(category.name).text(category.name);
             selectCategory.append(option);
+            event_category.append(option);
           });
         } else {
           console.log("No categories found.");

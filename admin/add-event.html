@@ -167,21 +167,21 @@
           <div class="container-fluid">
             <div class="row mb-2">
               <div class="col-sm-6">
-                <h1 class="m-0">All Events</h1>
+                <h1 class="m-0">Add Event</h1>
               </div>
               <!-- /.col -->
               <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                   <li class="breadcrumb-item"><a href="index.jsp">Home</a></li>
-                  <li class="breadcrumb-item active">Events</li>
+                  <li class="breadcrumb-item active">Add Event</li>
                 </ol>
               </div>
               <!-- /.col -->
               <div class="col-12 d-flex justify-content-end">
                 <a
-                  href="add-event.html"
-                  class="btn btn-primary btn-sm text-end"
-                  >Add New</a
+                  href="events.html"
+                  class="btn btn-secondary btn-sm text-end"
+                  >Back</a
                 >
               </div>
             </div>
@@ -198,39 +198,52 @@
             <div class="row">
               <div class="card w-100">
                 <div class="card-body">
-                  <table
-                    id="datatable"
-                    class="table table-bordered table-striped"
-                  >
-                    <thead>
-                      <tr>
-                        <th>Serial No.</th>
-                        <th>Code</th>
-                        <th>Name</th>
-                        <th>Action</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>
-                          <a
-                            href="#"
-                            class="btn btn-success btn-sm"
-                            >Edit</a
+                  <form>
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="form-group">
+                          <label for="event_desc">Event Decription</label>
+                          <textarea
+                            name="event_desc"
+                            id="event_desc"
+                          ></textarea>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_name">Write the title</label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="event_name"
+                            name="event_name"
+                            required
+                            placeholder="Write the title"
+                          />
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label for="event_category"
+                            >Select the Category</label
                           >
-                          <a
-                            href="#"
-                            class="btn btn-danger btn-sm"
-                          >
-                            Delete
-                          </a>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
+                          <select
+                            name="event_category"
+                            class="form-control"
+                            id="event_category"
+                          ></select>
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <button
+                          type="submit"
+                          class="btn btn-primary"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -290,20 +303,5 @@
     <script src="dist/js/adminlte.js"></script>
     <!-- custom js -->
     <script src="dist/js/app.js"></script>
-
-    <script>
-      $(document).ready(function () {
-        $("#datatable")
-          .DataTable({
-            responsive: true,
-            lengthChange: false,
-            autoWidth: false,
-            buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
-          })
-          .buttons()
-          .container()
-          .appendTo("#datatable_wrapper .col-md-6:eq(0)");
-      });
-    </script>
   </body>
 </html>
